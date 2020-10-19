@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.Extensions.Configuration;
 
 namespace WebApi13Oct2020.Controllers
 {
@@ -18,10 +19,13 @@ namespace WebApi13Oct2020.Controllers
         {
         }
 
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=DESKTOP-UVR8UE5;Database=CFLDB;Trusted_Connection=True;");
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+            .AddJsonFile("appsettings.json")
+            .Build();
+            optionsBuilder.UseSqlServer(configuration.GetConnectionString("Database_Connection"));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -29,7 +33,7 @@ namespace WebApi13Oct2020.Controllers
             modelBuilder.Entity<Team>()
                 .ToTable("Team");
         }
-          public DbSet<Team> Teams { get; set; }
+        public DbSet<Team> Teams { get; set; }
         public DbSet<Schedule> Schedules { get; set; }
     }
 }
