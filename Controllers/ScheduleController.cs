@@ -17,8 +17,6 @@ namespace WebApi13Oct2020.Controllers
         public SchedulesController(CFLDBContext  c)
         {
             _cfldb = c;
-        
-        
         }
 
         // GET: api/<ValuesController>

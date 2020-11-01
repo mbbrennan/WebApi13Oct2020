@@ -2,28 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace WebApi13Oct2020.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TeamsController : ControllerBase
+    public class SeasonsController : ControllerBase
     {
         private readonly CFLDBContext _cfldb;
-        
-        public TeamsController(CFLDBContext  c)
+
+        public SeasonsController(CFLDBContext c)
         {
             _cfldb = c;
         }
 
         // GET: api/<ValuesController>
         [HttpGet]
-        public IEnumerable<Team> Get()
+        public IEnumerable<Season> Get()
         {
-            return _cfldb.Teams;
+            return _cfldb.Seasons;
             //return new string[] { "value1", "value2" };
         }
 
@@ -34,15 +33,13 @@ namespace WebApi13Oct2020.Controllers
             return "value";
         }
 
-        
         // POST api/<ValuesController>
         [HttpPost]
-             public void Post([FromBody] Team value)
+        public void Post([FromBody] Season value)
         {
             _cfldb.Add(value);
             _cfldb.SaveChanges();
         }
-        
 
         // PUT api/<ValuesController>/5
         [HttpPut("{id}")]
@@ -57,3 +54,4 @@ namespace WebApi13Oct2020.Controllers
         }
     }
 }
+

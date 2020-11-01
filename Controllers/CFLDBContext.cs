@@ -35,5 +35,6 @@ namespace WebApi13Oct2020.Controllers
         }
         public DbSet<Team> Teams { get; set; }
         public DbSet<Schedule> Schedules { get; set; }
+        public DbSet<Season> Seasons { get; set; }
     }
 }
